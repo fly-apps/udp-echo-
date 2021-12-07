@@ -1,0 +1,28 @@
+# fly.toml file generated for sample-udp-tcp-echo on 2021-12-07T16:48:59-06:00
+
+app = "sample-udp-tcp-echo"
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[env]
+  ECHO_PORT = 5000
+
+[experimental]
+  allowed_public_ports = []
+  auto_rollback = true
+
+[[services]]
+  internal_port = 5000
+  protocol = "udp"
+
+  [[services.ports]]
+    port = "5000"
+
+[[services]]
+  internal_port = 5000
+  protocol = "tcp"
+
+  [[services.ports]]
+    port = "5000"
