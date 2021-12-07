@@ -38,10 +38,19 @@ func main() {
 	// this catches me up every time I write a UDP anything on Fly.io,
 	// and I wrote Fly.io's UDP feature. All I can do is apologize.
 
+	// in other programming languages, this might look like:
+	//    s = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)
+	//    s.bind("fly-global-services", port)
+
 	udp, err := net.ListenPacket("udp", fmt.Sprintf("fly-global-services:%d", port))
 	if err != nil {
 		log.Fatalf("can't listen on %d/udp: %s", port, err)
 	}
+
+	// in other programming languages, this might look like:
+	//    s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)
+	//    s.bind("0.0.0.0", port)
+	//    s.listen()
 
 	tcp, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
